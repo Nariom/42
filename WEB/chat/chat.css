@@ -1,0 +1,65 @@
+body
+{
+    margin:0px;
+    padding:2vh 2vw;
+    background-image:url('img/stars.png');
+    background-repeat:repeat;
+}
+
+span
+{
+    margin:0px;
+    padding:0px;
+    font-family: Eurostile;
+    font-size:20px;
+}
+
+img
+{
+    width:20px;
+    height:20px;
+    margin:0px;
+    padding:0px;
+}
+
+#main
+{
+    position:absolute;
+    width:96vw;
+    height:96vh;
+    padding:0px;
+}
+
+#chat
+{
+    position:relative;
+    width:94vw;
+    height:89vh;
+    padding:1vh 1vw;
+    border:1px solid snow;
+    border-radius:5px;
+    overflow:auto;
+}
+
+#speak
+{
+    position:relative;
+    width:94vw;
+    height:3vh;
+    margin:0px;
+    padding:1vh 1vw;
+    background-color:transparent;
+    border:1px solid snow;
+    border-radius:5px;
+    font-family: Eurostile;
+    font-size:3vh;
+    color:snow;
+}
+
+.r0 {color:snow;}
+.r1 {color:beige;}
+.r2 {color:khaki;}
+.r3 {color:goldenrod;}
+.r4 {color:gold;}
+.r5 {color:darkorange;}
+.r6 {color:crimson;}

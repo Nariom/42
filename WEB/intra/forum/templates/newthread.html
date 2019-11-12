@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+  <form action="." method="post" class="container">
+    {% csrf_token %}
+    <table class="form">
+      <tr><a href="/agora/{{ cat_id }}/{{ thd_id }}/" class="black">&uarr;</a></tr>
+      {% for field in tform %}
+        <tr class="form">
+          <th class="form">{{ field.label_tag }}</th>
+          <td class="form">{{ field }}</td>
+          <td class="error">{{ field.errors }}</td>
+        </tr>
+      {% endfor %}
+      {% for field in pform %}
+        <tr class="form">
+          <th class="form">{{ field.label_tag }}</th>
+          <td class="form">{{ field }}</td>
+          <td class="error">{{ field.errors }}</td>
+        </tr>
+      {% endfor %}
+      <tr class="form"><td class="form"></td><td class="form"><input type="submit" value="Send" /></td></tr>
+    </table>
+  </form>
+{% endblock %}
+{% block footer %}
+{% endblock %}

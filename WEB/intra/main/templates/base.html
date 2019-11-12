@@ -1,0 +1,172 @@
+{% load i18n %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="forum" content="forum">
+    <title>Agora</title>
+    <style type="text/css">
+      header {
+        height:8vh;
+        background-color:#262626;
+      }
+      body {
+        margin:0px;
+        padding:0px;
+        background-color:snow;
+      }
+      footer {
+        height:8vh;
+        background-color:#262626;
+        text-align:right;
+      }
+      .main {
+        margin:0px;
+        padding:1vh 1vw;
+        font-family: Eurostile;
+        font-size:1.5vmin;
+      }
+      #main
+      {
+        height:78vh;
+        overflow:auto;
+        margin:0px;
+        padding:0px;
+      }
+      .form
+      {
+        margin:0px;
+        padding:0px;
+      }
+      th.form
+      {
+        text-align:left;
+      }
+      ul, li
+      {
+        padding:0px 1vw;
+        margin:0px;
+        list-style-type:none;
+      }
+      .error
+      {
+        color:red;
+      }
+      .container
+      {
+        width:77vw;
+        min-height:4.25vh;
+        border:0.25vw solid #262626;
+        border-radius:5px;
+        padding:1.5vh 1.5vw;
+        margin:1vh 10vw;
+      }
+      .content
+      {
+        padding:0.5vh 0.5vw;
+        margin:0.5vh 0.5vw;
+        width:10vw;
+        text-overflow:ellipsis;
+        text-decoration:none;
+        text-align:center;
+        overflow:hidden;
+        white-space:nowrap;
+        display:inline-block;
+      }
+      #menu
+      {
+        border:0.25vw solid snow;
+        border-radius:5px;
+        background-color:#262626;
+        color:snow;
+      }
+      #cat
+      {
+        border:0.25vw solid #262626;
+        border-radius:5px;
+        background-color:snow;
+        color:black;
+      }
+      #menu:hover
+      {
+        color:#262626;
+        background-color:snow;
+      }
+      #cat:hover
+      {
+        color:snow;
+        background-color:#262626;
+      }
+      .msg
+      {
+        font-size:2vmin;
+        text-align:justify;
+        font-weight:bold;
+        color:#262626;
+      }
+      .comment
+      {
+        font-size:1.5vmin;
+        text-align:justify;
+        font-style:italic;
+        color:#262626;
+      }
+      .black
+      {
+        text-decoration:none;
+        color:#262626;
+      }
+      .white
+      {
+        text-decoration:none;
+        color:snow;
+      }
+      h1
+      {
+        margin: 1vh 0px;
+        padding:0px;
+      }
+      .pict
+      {
+        height:18vmin;
+        width:15vmin;
+      }
+    </style>
+  </head>
+  <header class="main">
+    {% block header %}
+      <span class="white">Welcome, {{ user.username }} ! </span><a href="/index/deconnect/" class="white">[logout]</a>
+      <br><br>
+      <a href="/index/" class="content" id="menu">Home</a>
+      {% if user.is_staff %}
+        <a href="/admin/" class="content" id="menu" target="_blank">Admin</a>
+      {% endif %}
+      <a href="/agora/" class="content" id="menu">Agora</a>
+      <a href="/agora/ticket/" class="content" id="menu">Ticket</a>
+      <a href="/agora/directory/" class="content" id="menu">Directory</a>
+    {% endblock %}
+  </header>
+  <body>
+    <div id="main" class="main">
+    {% block body %}{% endblock %}
+    </div>
+  </body>
+  <footer class="main">
+    {% block footer %}{% endblock %}
+    <form action="/i18n/setlang/" method="post">{% csrf_token %}
+      <input name="next" type="hidden" value="/" />
+      <select name="language">
+        {% for lang in LANGUAGES %}
+          {% if LANGUAGE_CODE == lang.0 %}
+            <option value="{{ lang.0 }}" selected>{{ lang.1 }}</option>
+          {% else %}
+            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+      <input type="submit" value="Go" />
+    </form>
+    <hr>
+    <span class="white">Copyright </span><a href="/index/contact/" class="white">[rbaudot]</a><span class="white"> 2014</span>
+  </footer>
+</html>

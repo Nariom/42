@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block header %}
+  <span class="white">Registration</span>
+  <br>
+  <br>
+  <a href="/index/" class="content" id="menu">Home</a>
+{% endblock %}
+{% block body %}
+  <form action="." method="post" class="container">
+    {% csrf_token %}
+    <table class="form">
+      {% for field in form %}
+            <tr class="form">
+              <th class="form">{{ field.label_tag }}</th>
+              <td class="form">{{ field }}</td>
+            </tr>
+      {% endfor %}
+      <tr><td class="form"></td><td class="form"><input type="submit" value="Register" /></td></tr>
+      <tr><td colspan="2" class="error">{{ error }}</td></tr>
+    </table>
+  </form>
+{% endblock %}
+{% block footer %}
+{% endblock %}

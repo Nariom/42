@@ -1,0 +1,52 @@
+# -----------------------------------------------------------------------------#
+#                              --- Scene 2 ---                                 #
+# -----------------------------------------------------------------------------#
+
+	[cam]
+	origin		0		0		-1500
+	dir			0		0		1
+	up			0		-1		0
+
+	[light]
+	origin		200		-100	100
+	color		255		0		0
+
+	[light]
+	origin		-200	-100	100
+	color		0		255 	0
+
+	[plane]
+	origin		0		100		0
+	equation	0		300		100		5
+	color		0		51		102
+	shine		0
+
+	[sphere]
+	origin		-30		-20		200
+	radius		30
+	color		102		255		0
+	shine		8
+
+	[sphere]
+	origin		0		10		200
+	radius		30
+	color		255		102		0
+	shine		8;
+
+	[sphere]
+	origin		-150	-40		250
+	radius		30
+	color		0		255		102
+	shine		8
+
+	[sphere]
+	origin		50		50		100
+	radius		30
+	color		0		102		255
+	shine		8
+
+	[sphere]
+	origin		100		-50		350
+	radius		50
+	color		255		0		255
+	shine		8

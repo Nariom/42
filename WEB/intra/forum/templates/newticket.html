@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+  <form action="." method="post" class="container">
+    {% csrf_token %}
+    <table class="form">
+      {% for field in form %}
+        <tr class="form">
+          <th class="form">{{ field.label_tag }}</th>
+          <td class="form">{{ field }}</td>
+          <td class="error">{{ field.errors }}</td>
+        </tr>
+      {% endfor %}
+      <tr class="form"><td class="form"></td><td class="form"><input type="submit" value="Send" /></td></tr>
+    </table>
+  </form>
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,58 @@
+WSGIScriptAlias / '/nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/intra/wsgi.py'
+
+WSGIPythonPath '/nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/'
+
+<Directory '/nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/intra'>
+    <IfVersion < 2.3 >
+        Order allow,deny
+        Allow from all
+    </IfVersion>
+    <IfVersion >= 2.3>
+        Require all granted
+    </IfVersion>
+</Directory>
+
+<VirtualHost *:80>
+
+    ServerName intra.local.42.fr
+    ServerAlias intra
+    ServerAdmin rbaudot@student.42.fr
+
+    DocumentRoot /nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/intra/
+
+    Alias /robots.txt /nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/static/robots.txt
+
+    Alias /favicon.ico /nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/static/favicon.ico
+
+    AliasMatch ^/([^/]*\.css) /nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/static/css/$1
+
+    Alias /media/ /nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/media/
+
+    Alias /static/ /nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/static/
+
+    <Directory '/nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/static'>
+        <IfVersion < 2.3 >
+            Order allow,deny
+            Allow from all
+        </IfVersion>
+        <IfVersion >= 2.3>
+            Require all granted
+        </IfVersion>
+    </Directory>
+
+    <Directory '/nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/media'>
+        <IfVersion < 2.3 >
+            Order allow,deny
+            Allow from all
+        </IfVersion>
+        <IfVersion >= 2.3>
+            Require all granted
+        </IfVersion>
+    </Directory>
+
+    WSGIDaemonProcess intra user=rbaudot group=2013 threads=25
+    WSGIProcessGroup intra
+
+    WSGIScriptAlias / "/nfs/zfs-student-4/users/2013/rbaudot/DjangoStack/apps/django/django_projects/intra/intra/apache/django.wsgi"
+
+</VirtualHost>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+  {% if tkt_id %}
+    <div class="container">
+      <h1>
+        <a href="/agora/ticket/{{ tkt_id }}/" class="black">{{ tkt }}</a>
+        <a href="/agora/ticket/{{ tkt_id }}/status/" class="black">
+        {% if tkt.status %}
+          [opened]
+        {% else %}
+          [closed]
+        {% endif %}
+        </a>
+      </h1>
+    </div>
+    {% for msg in msg_list %}
+      <div class="container">
+        <p class="msg">{{ msg.message }}</p>
+        <table>
+          <tr>
+            <td>{{ msg.author }}</td>
+            <td>on</td>
+            <td>{{ msg.date }}</td>
+          </tr>
+        </table>
+      </div>
+    {% endfor %}
+    {% if tkt.status %}
+      <form action="." method="post" class="container">
+        {% csrf_token %}
+        <table class="form">
+          {% for field in form %}
+            <tr class="form">
+              <th class="form">{{ field.label_tag }}</th>
+              <td class="form">{{ field }}</td>
+              <td class="error">{{ field.errors }}</td>
+            </tr>
+          {% endfor %}
+          <tr class="form"><td class="form"></td><td class="form"><input type="submit" value="Send" /></td></tr>
+        </table>
+      </form>
+    {% endif %}
+  {% else %}
+    <div class="container">
+      <h1><a href="/agora/ticket/newticket/" class="black">[New Ticket]</a></h1>
+    </div>
+    {% for tk in tkt_list %}
+      <div class="container">
+        <h1><a href="/agora/ticket/{{ tk.id }}/" class="black">{{ tk }}</a></h1>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

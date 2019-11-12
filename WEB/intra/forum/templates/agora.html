@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+  {% if cat_list %}
+    <div class="container">
+    {% for cat in cat_list %}
+      <a href="/agora/{{ cat.id }}" class="content" id="cat">{{ cat.name }}</a>
+    {% endfor %}
+    </div>
+  {% endif %}
+  {% if name %}
+    <div class="container">
+      <h1>
+        <a href="/agora/{{ cat_id }}/" class="black">{{ name }}</a>
+        {% if parent %}
+          <a href="/agora/{{ parent }}" class="black">&uarr;</a>
+        {% else %}
+          <a href="/agora/" class="black">&uarr;</a>
+        {% endif %}
+        {% if not thd_id %}
+          <a href="/agora/{{ cat_id }}/newthread/" class="black">[New Thread]</a>
+        {% endif %}
+      </h1>
+    </div>
+  {% endif %}
+  {% for thd in thd_list %}
+    <div class="container">
+      <h1><a href="/agora/{{ cat_id }}/{{ thd.id }}/" class="black">{{ thd.name }}</a></h1>
+      By {{ thd.get_author.author }} on {{ thd.date }}
+    </div>
+  {% endfor %}
+  {% if tname %}
+    <div class="container">
+      <h1><a href="/agora/{{ cat_id }}/{{ thd_id }}/" class="black">{{ tname }}</a></h1>
+    </div>
+  {% endif %}
+  {% for msg in msg_list %}
+    <div class="container">
+      <p class="msg">{{ msg.message }}</p>
+      <table>
+        <tr>
+          <td>{{ msg.author }}</td>
+          <td>on</td>
+          <td>{{ msg.date }}</td>
+          <td><a href="/agora/{{ cat_id }}/{{ thd_id }}/{{ msg.id }}/newcomment/" class="black">[Comment]</a></td>
+        </tr>
+        <tr><td colspan="4"><hr></td></tr>
+      </table>
+      {% with  msg.get_cmt as cmt_list %}
+        {% for cmt in cmt_list %}
+          <p class="comment">{{ cmt.message }}</p>
+          <table>
+            <tr>
+              <td>{{ cmt.author }}</td>
+              <td>on</td>
+              <td>{{ cmt.date }}</td>
+            </tr>
+          </table>
+        {% endfor %}
+      {% endwith %}
+    </div>
+  {% endfor %}
+  {% if thd_id %}
+    <form action="." method="post" class="container">
+      {% csrf_token %}
+      <table class="form">
+        {% for field in form %}
+          <tr class="form">
+            <th class="form">{{ field.label_tag }}</th>
+            <td class="form">{{ field }}</td>
+            <td class="error">{{ field.errors }}</td>
+          </tr>
+        {% endfor %}
+        <tr class="form"><td class="form"></td><td class="form"><input type="submit" value="Send" /></td></tr>
+      </table>
+    </form>
+  {% endif %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
